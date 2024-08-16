@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Расходы</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../lib/css/magnific-popup.css">
+    <link rel="stylesheet" href="../../../lib/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../../styles/layout.css">
+</head>
+<body>
+
+<div class="d-flex">
+    <aside id="sidebar"
+           class="border border-secondary-subtle text-center min-vh-100 d-flex flex-column flex-shrink-0"
+           style="width: 240px;">
+        <div class="pt-5 pb-4 border-bottom">
+            <a href="#" class="logo">
+                <img src="../../static/images/logo.png" alt="Логотип" class="w-50">
+            </a>
+        </div>
+        <div class="nav nav-pills flex-column mb-auto mt-5 pt-3 ps-3 pe-3 text-start">
+            <a href="#" class="nav-link pt-2 pb-2 active" aria-current="page">
+                <i class="fa-solid fa-house-chimney me-2"></i>
+                Главная
+            </a>
+            <a href="#" class="nav-link pt-2 pb-2 text-primary-emphasis" aria-current="page">
+                <i class="fa-regular fa-money-bill-1 me-2"></i>
+                Доходы & Расходы
+            </a>
+            <a href="#collapse-category" class="nav-link pt-2 pb-2 text-primary-emphasis btn text-start"
+               aria-current="page"
+               data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse-category">
+                Категории
+            </a>
+            <div class="collapse" id="collapse-category">
+                <div class="card-body text-start">
+                    <a href="/#/income" class="nav-link pt-2 pb-2 text-primary-emphasis"
+                       aria-current="page">Доходы</a>
+                    <a href="/#/expenses" class="nav-link pt-2 pb-2 text-primary-emphasis"
+                       aria-current="page">Расходы</a>
+                </div>
+            </div>
+        </div>
+        <div class="ps-3 text-start">
+            Баланс: <a href="#" id="balance" class="text-primary text-decoration-none">нет данных</a>
+        </div>
+        <hr>
+        <div class="ps-3 pe-3 pb-5">
+            <div class="profile d-flex align-items-center">
+                <div id="avatar" class="d-flex justify-content-center align-items-center"
+                     style="width: 40px; height: 40px; border-radius: 50%; background: lightgray;">
+                    <i class="fa-regular fa-user fs-5"></i>
+                </div>
+                <div id="full-name" class="ms-3">
+                    Евгений Назаров
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="w-100 p-5">
+        <h1 id="title" class="text-primary-emphasis mt-3 mb-5">Расходы</h1>
+        <div id="content">
+            <div class="container-lg p-0 row row-cols-xl-3 row-cols-md-2 row-cols-1">
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Еда</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Жильё</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Здоровье</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Кафе</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Авто</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Одежда</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Развлечения</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Счета</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="card p-3">
+                        <h3 class="h3 text-primary-emphasis mb-3">Спорт</h3>
+                        <div class="d-flex align-items-center d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary">Редактировать</button>
+                            <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-2">
+                    <a href="#"
+                       class="card p-3 h-100 w-100 text-decoration-none d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-plus text-body-tertiary"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sidebar_toggler">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+<div id="confirmation-popup"
+     class="mfp-hide">
+    <div class="ps-4 pe-4 col-4 mx-auto">
+        <div class="card p-4 text-center text-primary-emphasis fw-medium">
+            <p class="mt-3 col-11 ms-auto me-auto">
+                Вы действительно хотите удалить категорию?
+            </p>
+            <div class="d-flex align-items-center justify-content-center mb-3">
+                <button class="btn btn-success me-3">Да, удалить</button>
+                <button class="btn btn-danger">Не удалять</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../../lib/js/jquery-3.7.1.min.js"></script>
+<script src="../../../lib/js/jquery.magnific-popup.min.js"></script>
+<script src="../../../lib/js/bootstrap.min.js"></script>
+<script src="../../scripts/layout.js"></script>
+<script src="../../scripts/expenses-main.js"></script>
+</body>
+</html>
