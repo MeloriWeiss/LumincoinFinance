@@ -1,43 +1,43 @@
 <div class="container-lg p-0 row row-cols-xl-3 row-cols-md-2 row-cols-1">
-    <div class="p-2">
-        <div class="card p-3">
+    <div class="category-card p-2">
+        <div class="card p-3 h-100">
             <h3 class="h3 text-primary-emphasis mb-3">Депозиты</h3>
             <div class="d-flex align-items-center d-flex flex-wrap gap-2">
-                <a href="/#/income-create" class="btn btn-primary">Редактировать</a>
+                <a href="/#/incomes-edit" class="btn btn-primary">Редактировать</a>
                 <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
             </div>
         </div>
     </div>
-    <div class="p-2">
-        <div class="card p-3">
+    <div class="category-card p-2">
+        <div class="card p-3 h-100">
             <h3 class="h3 text-primary-emphasis mb-3">Зарплата</h3>
             <div class="d-flex align-items-center d-flex flex-wrap gap-2">
-                <a href="/#/income-create" class="btn btn-primary">Редактировать</a>
+                <a href="/#/incomes-edit" class="btn btn-primary">Редактировать</a>
                 <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
             </div>
         </div>
     </div>
-    <div class="p-2">
-        <div class="card p-3">
+    <div class="category-card category-item p-2">
+        <div class="card p-3 h-100">
             <h3 class="h3 text-primary-emphasis mb-3">Снабжения</h3>
             <div class="d-flex align-items-center d-flex flex-wrap gap-2">
-                <a href="/#/income-create" class="btn btn-primary">Редактировать</a>
+                <a href="/#/incomes-edit" class="btn btn-primary">Редактировать</a>
                 <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
             </div>
         </div>
     </div>
 
-    <div class="p-2">
-        <div class="card p-3">
+    <div class="category-card p-2">
+        <div class="card p-3 h-100">
             <h3 class="h3 text-primary-emphasis mb-3">Инвестиции</h3>
             <div class="d-flex align-items-center d-flex flex-wrap gap-2">
-                <a href="/#/income-create" class="btn btn-primary">Редактировать</a>
+                <a href="/#/incomes-edit" class="btn btn-primary">Редактировать</a>
                 <a href="#confirmation-popup" class="open-popup-link btn btn-danger">Удалить</a>
             </div>
         </div>
     </div>
-    <div class="p-2">
-        <a href="/#/income-create"
+    <div class="category-card p-2">
+        <a href="/#/incomes-create"
            class="card p-3 h-100 w-100 text-decoration-none d-flex justify-content-center align-items-center">
             <i class="fa-solid fa-plus text-body-tertiary"></i>
         </a>
@@ -52,8 +52,8 @@
                 Связанные доходы будут удалены навсегда
             </p>
             <div class="d-flex align-items-center justify-content-center flex-wrap gap-3 mb-3">
-                <button class="btn btn-success" id="delete">Да, удалить</button>
-                <button class="btn btn-danger" id="not-delete">Не удалять</button>
+                <button class="btn btn-success confirm-button" id="delete">Да, удалить</button>
+                <button class="btn btn-danger mfp-close confirm-button">Не удалять</button>
             </div>
         </div>
     </div>
@@ -98,7 +98,7 @@
 <!--            </a>-->
 <!--            <div class="collapse" id="collapse-category">-->
 <!--                <div class="card-body text-start">-->
-<!--                    <a href="/#/income" class="nav-link pt-2 pb-2 text-primary-emphasis"-->
+<!--                    <a href="/#/incomes" class="nav-link pt-2 pb-2 text-primary-emphasis"-->
 <!--                       aria-current="page">Доходы</a>-->
 <!--                    <a href="/#/expenses" class="nav-link pt-2 pb-2 text-primary-emphasis"-->
 <!--                       aria-current="page">Расходы</a>-->
@@ -201,6 +201,6 @@
 <!--<script src="../../../lib/js/jquery.magnific-popup.min.js"></script>-->
 <!--<script src="../../../lib/js/bootstrap.min.js"></script>-->
 <!--<script src="../../scripts/layout.js"></script>-->
-<!--<script src="../../scripts/income-main.js"></script>-->
+<!--<script src="../../scripts/incomes-main.js"></script>-->
 <!--</body>-->
 <!--</html>-->

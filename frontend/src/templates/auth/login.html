@@ -6,7 +6,7 @@
         <div class="mx-auto">
             <div class="card-body login-card-body">
                 <p class="login-box-msg text-center display-6 fw-semibold text-primary-emphasis mb-4">Вход</p>
-                <span id="common-error" class="error invalid-feedback text-center mb-3">Неправильный email или пароль</span>
+                <span id="login-error" class="error invalid-feedback mb-2 text-center">Такого пользователя не существует</span>
                 <form>
                     <div class="input-group mb-2">
                         <div class="input-group-text">
@@ -19,7 +19,7 @@
                         <div class="input-group-text">
                             <i class="fa fa-lock"></i>
                         </div>
-                        <input type="email" class="form-control" placeholder="Пароль" id="password">
+                        <input type="password" class="form-control" placeholder="Пароль" id="password">
                         <span id="password-error" class="error invalid-feedback">Пароль неверный</span>
                     </div>
                     <div class="row mb-4">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-12">
-                            <a href="/#/" class="btn btn-primary btn-block w-100" id="login-button">Войти</a>
+                            <button type="button" class="btn btn-primary btn-block w-100" id="login-button">Войти</button>
                         </div>
                     </div>
                     <div class="row">

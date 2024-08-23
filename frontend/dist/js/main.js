@@ -1,16 +1,16 @@
 export class Main {
     constructor() {
-        const incomeChart = document.getElementById('income-chart');
+        const incomesChart = document.getElementById('incomes-chart');
         const expensesChart = document.getElementById('expenses-chart');
 
         this.setChartsData();
 
-        this.createChart(incomeChart, this.incomeChartData);
+        this.createChart(incomesChart, this.incomesChartData);
         this.createChart(expensesChart, this.expensesChartData);
     }
 
     setChartsData() {
-        this.incomeChartData = {
+        this.incomesChartData = {
             labels: [
                 'Red',
                 'Orange',

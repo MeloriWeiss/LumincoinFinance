@@ -7,11 +7,11 @@
             </a>
         </div>
         <div class="nav nav-pills flex-column mb-auto mt-5 pt-3 ps-3 pe-3 text-start">
-            <a href="/#/" class="nav-link pt-2 pb-2 active" aria-current="page">
+            <a href="/#/" id="main-button" class="sidebar-links nav-link pt-2 pb-2" aria-current="page">
                 <i class="fa-solid fa-house-chimney me-2"></i>
                 Главная
             </a>
-            <a href="/#/income-expenses-main" class="nav-link pt-2 pb-2 text-primary-emphasis" aria-current="page">
+            <a href="/#/incomes-expenses-main" id="incomes-expenses-button" class="sidebar-links nav-link pt-2 pb-2" aria-current="page">
                 <i class="fa-regular fa-money-bill-1 me-2"></i>
                 Доходы & Расходы
             </a>
@@ -23,9 +23,9 @@
             </a>
             <div class="collapse" id="collapse-category">
                 <div class="bg-primary rounded-bottom-3">
-                    <a href="/#/income-main" class="nav-link pt-2 pb-2 collapse-element collapse-element-active middle-collapse-element"
+                    <a href="/#/incomes-main" id="incomes-collapse" class="nav-link pt-2 pb-2 collapse-element middle-collapse-element"
                        aria-current="page">Доходы</a>
-                    <a href="/#/expenses-main" class="nav-link pt-2 pb-2 collapse-element"
+                    <a href="/#/expenses-main" id="expenses-collapse" class="nav-link pt-2 pb-2 collapse-element"
                        aria-current="page">Расходы</a>
                 </div>
             </div>
@@ -35,25 +35,13 @@
         </div>
         <hr>
         <div class="ps-3 pe-3 pb-5">
-
-<!--            <div class="dropdown">-->
-<!--                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                    Dropdown button-->
-<!--                </button>-->
-<!--                <ul class="dropdown-menu">-->
-<!--                    <li><a class="dropdown-item" href="#">Action</a></li>-->
-<!--                    <li><a class="dropdown-item" href="#">Another action</a></li>-->
-<!--                    <li><a class="dropdown-item" href="#">Something else here</a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
             <div class="profile d-flex align-items-center dropdown" role="button">
                 <div class="dropdown-toggle w-100 d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div id="avatar" class="d-flex justify-content-center align-items-center"
-                         style="width: 40px; height: 40px; border-radius: 50%; background: lightgray;">
+                    <div id="avatar" class="d-flex justify-content-center align-items-center">
                         <i class="fa-regular fa-user fs-5"></i>
                     </div>
-                    <div id="full-name" class="ms-3">
-                        Евгений Назаров
+                    <div id="full-name" class="ms-3 text-start">
+                        Имя Фамилия
                     </div>
                 </div>
                 <ul class="dropdown-menu">
@@ -114,7 +102,7 @@
 <!--            </a>-->
 <!--            <div class="collapse" id="collapse-category">-->
 <!--                <div class="bg-primary rounded-bottom-3">-->
-<!--                    <a href="/#/income" class="nav-link pt-2 pb-2 collapse-element collapse-element-active middle-collapse-element"-->
+<!--                    <a href="/#/incomes" class="nav-link pt-2 pb-2 collapse-element collapse-element-active middle-collapse-element"-->
 <!--                       aria-current="page">Доходы</a>-->
 <!--                    <a href="/#/expenses" class="nav-link pt-2 pb-2 collapse-element"-->
 <!--                       aria-current="page">Расходы</a>-->

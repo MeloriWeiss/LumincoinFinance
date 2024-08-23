@@ -1,0 +1,23 @@
+.category-card {
+    min-height: 137px !important;
+}
+
+.confirm-button {
+    width: 110px;
+    height: 38px;
+}
+
+.mfp-close {
+    background-color: #dc3545 !important;
+    color: white !important;
+    font-size: 16px;
+    line-height: 24px !important;
+}
+
+.mfp-close:hover {
+    background-color: #bb2d3b !important;
+}
+
+.date-input {
+    width: 40px;
+}

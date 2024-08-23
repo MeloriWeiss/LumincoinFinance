@@ -1,4 +1,4 @@
-export class IncomeExpensesMain {
+export class IncomesExpensesMain {
     constructor() {
         this.initLib();
     }

@@ -89,6 +89,8 @@
     background-color: white !important;
     color: #0d6efd !important;
     border: 1px solid #0d6efd !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
 }
 
 .middle-collapse-element {
@@ -103,8 +105,8 @@
     transform: rotate(-90deg);
 }
 
-.mfp-close {
-    display: none !important;
+.dropdown-toggle::after {
+    display: none;
 }
 
 @media screen and (max-width: 992px) {

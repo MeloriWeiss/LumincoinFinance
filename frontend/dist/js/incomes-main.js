@@ -1,6 +1,8 @@
-export class IncomeMain {
+export class IncomesMain {
     constructor() {
         this.initLib();
+
+        document.getElementById('incomes-collapse').classList.add('collapse-element-active');
     }
 
     initLib() {

@@ -1,8 +1,20 @@
+import {AuthUtils} from "../utils/auth-utils";
+import {HttpUtils} from "../utils/http-utils";
+
 export class Layout {
     constructor() {
+        this.initLayout();
+    }
+
+    initLayout() {
         this.sidebar = document.querySelector('#sidebar');
         this.sidebarToggler = document.querySelector('.sidebar_toggler');
         document.getElementById('logout').onclick = () => this.logout();
+
+        const fullName = `${AuthUtils.getAuthUserInfo().name} ${AuthUtils.getAuthUserInfo().lastName}`;
+        if (fullName) {
+            document.getElementById('full-name').innerHTML = fullName;
+        }
 
         this.sidebarToggler.addEventListener('click', () => {
             this.sidebar.classList.toggle('show');
@@ -27,8 +39,20 @@ export class Layout {
         }
     }
 
-    logout() {
-        // fetch
-        window.location.hash = '#/login';
+    async logout() {
+        let refreshToken = AuthUtils.getAuthTokensInfo().refreshToken;
+        if (refreshToken) {
+            let result = await HttpUtils.request('/logout', 'POST', {
+                refreshToken: refreshToken,
+            });
+            if (result) {
+                AuthUtils.resetAuthInfo();
+                return window.location.hash = '#/login';
+            } else {
+                return alert('Ошибка выхода');
+            }
+        } else {
+            return alert('Ошибка выхода');
+        }
     }
 }

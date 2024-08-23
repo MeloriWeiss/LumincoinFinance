@@ -20,9 +20,9 @@
         </div>
         <div class="col d-flex">
             c
-            <input href="#" class="text-secondary ms-4 me-4 border-0 text-decoration-underline h-100" placeholder="Дата">
+            <input href="#" class="date-input text-secondary ms-4 me-4 border-0 text-decoration-underline h-100" placeholder="Дата">
             по
-            <input href="#" class="text-secondary ms-4 border-0 text-decoration-underline h-100" placeholder="Дата">
+            <input href="#" class="date-input text-secondary ms-4 border-0 text-decoration-underline h-100" placeholder="Дата">
         </div>
     </div>
 
@@ -32,7 +32,7 @@
                 <h3 class="text-primary-emphasis mb-3">Доходы</h3>
                 <div class="vertical-line">
                     <div class="pb-4 d-flex justify-content-center chart-container">
-                        <canvas id="income-chart" class="chart col"></canvas>
+                        <canvas id="incomes-chart" class="chart col"></canvas>
                     </div>
                 </div>
             </div>
@@ -45,133 +45,3 @@
         </div>
     </div>
 </div>
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="ru">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8"/>-->
-<!--    <title>Главная</title>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" href="lib/css/bootstrap.min.css">-->
-<!--    <link rel="stylesheet" href="lib/fontawesome-free-6.6.0-web/css/all.min.css">-->
-<!--    <link rel="stylesheet" href="src/styles/pages/index.css">-->
-<!--    <link rel="stylesheet" href="src/styles/layout.css">-->
-<!--</head>-->
-<!--<body>-->
-
-
-<!--<div class="d-flex">-->
-<!--    <aside id="sidebar"-->
-<!--           class="border border-secondary-subtle text-center min-vh-100 d-flex flex-column flex-shrink-0"-->
-<!--           style="width: 240px;">-->
-<!--        <div class="pt-5 pb-4 border-bottom">-->
-<!--            <a href="#" class="logo">-->
-<!--                <img src="src/static/images/logo.png" alt="Логотип" class="w-50">-->
-<!--            </a>-->
-<!--        </div>-->
-<!--        <div class="nav nav-pills flex-column mb-auto mt-5 pt-3 ps-3 pe-3 text-start">-->
-<!--            <a href="#" class="nav-link pt-2 pb-2 active" aria-current="page">-->
-<!--                <i class="fa-solid fa-house-chimney me-2"></i>-->
-<!--                Главная-->
-<!--            </a>-->
-<!--            <a href="#" class="nav-link pt-2 pb-2 text-primary-emphasis" aria-current="page">-->
-<!--                <i class="fa-regular fa-money-bill-1 me-2"></i>-->
-<!--                Доходы & Расходы-->
-<!--            </a>-->
-<!--            <a href="#collapse-category" class="nav-link pt-2 pb-2 text-primary-emphasis btn text-start"-->
-<!--               aria-current="page"-->
-<!--               data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse-category">-->
-<!--                Категории-->
-<!--            </a>-->
-<!--            <div class="collapse" id="collapse-category">-->
-<!--                <div class="card-body text-start">-->
-<!--                    <a href="/#/income" class="nav-link pt-2 pb-2 text-primary-emphasis"-->
-<!--                       aria-current="page">Доходы</a>-->
-<!--                    <a href="/#/expenses" class="nav-link pt-2 pb-2 text-primary-emphasis"-->
-<!--                       aria-current="page">Расходы</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="ps-3 text-start">-->
-<!--            Баланс: <a href="#" id="balance" class="text-primary text-decoration-none">нет данных</a>-->
-<!--        </div>-->
-<!--        <hr>-->
-<!--        <div class="ps-3 pe-3 pb-5">-->
-<!--            <div class="profile d-flex align-items-center">-->
-<!--                <div id="avatar" class="d-flex justify-content-center align-items-center"-->
-<!--                     style="width: 40px; height: 40px; border-radius: 50%; background: lightgray;">-->
-<!--                    <i class="fa-regular fa-user fs-5"></i>-->
-<!--                </div>-->
-<!--                <div id="full-name" class="ms-3">-->
-<!--                    Евгений Назаров-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </aside>-->
-
-<!--    <div class="w-100 p-sm-5 p-4">-->
-<!--        <h1 id="title" class="text-primary-emphasis mt-3 mb-5">Главная</h1>-->
-<!--        <div id="content">-->
-<!--            <div class="container-lg p-0">-->
-<!--                <div class="text-center d-flex align-items-center row row-gap-3 col-xxl-10 col-12">-->
-<!--                    <div class="col">-->
-<!--                        <a class="btn btn-secondary w-100" href="#">Сегодня</a>-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a class="btn btn-outline-secondary w-100" href="#">Неделя</a>-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a class="btn btn-outline-secondary w-100" href="#">Месяц</a>-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a class="btn btn-outline-secondary w-100" href="#">Год</a>-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a class="btn btn-outline-secondary w-100" href="#">Все</a>-->
-<!--                    </div>-->
-<!--                    <div class="col">-->
-<!--                        <a class="btn btn-outline-secondary w-100" href="#">Интервал</a>-->
-<!--                    </div>-->
-<!--                    <div class="col d-flex">-->
-<!--                        c-->
-<!--                        <input href="#" class="text-secondary ms-4 me-4 border-0 text-decoration-underline h-100" placeholder="Дата">-->
-<!--                        по-->
-<!--                        <input href="#" class="text-secondary ms-4 border-0 text-decoration-underline h-100" placeholder="Дата">-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="container text-center pt-3 mt-5">-->
-<!--                    <div class="row row-cols-xxl-2 row-cols-1">-->
-<!--                        <div class="col mb-xxl-0 mb-5">-->
-<!--                            <h3 class="text-primary-emphasis mb-3">Доходы</h3>-->
-<!--                            <div class="pb-4 d-flex justify-content-center vertical-line">-->
-<!--                                <canvas id="income-chart" class="chart"></canvas>-->
-<!--                            </div>-->
-
-<!--                        </div>-->
-<!--                        <div class="col">-->
-<!--                            <h3 class="text-primary-emphasis mb-3">Расходы</h3>-->
-<!--                            <div class="pb-4 d-flex justify-content-center">-->
-<!--                                <canvas id="expenses-chart" class="chart"></canvas>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--<div class="sidebar_toggler">-->
-<!--    <div></div>-->
-<!--    <div></div>-->
-<!--    <div></div>-->
-<!--</div>-->
-
-<!--<script src="lib/js/bootstrap.min.js"></script>-->
-<!--<script src="lib/js/chart.js"></script>-->
-<!--<script src="src/scripts/layout.js"></script>-->
-<!--<script src="src/scripts/main.js"></script>-->
-<!--</body>-->
-<!--</html>-->

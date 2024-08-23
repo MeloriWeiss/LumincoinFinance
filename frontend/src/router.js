@@ -1,9 +1,17 @@
 import {Layout} from "./components/layout.js";
-import {IncomeExpensesMain} from "./components/income-expenses-main.js";
+import {IncomesExpensesMain} from "./components/incomes-expenses-main.js";
 import {Main} from "./components/main.js";
-import {IncomeMain} from "./components/income-main.js";
+import {IncomesMain} from "./components/incomes-main.js";
 import {ExpensesMain} from "./components/expenses-main.js";
 import {ExpensesCreate} from "./components/expenses-create.js";
+import {IncomesCreate} from "./components/incomes-create.js";
+import {FileUtils} from "./utils/file-utils.js";
+import {IncomesEdit} from "./components/incomes-edit.js";
+import {ExpensesEdit} from "./components/expenses-edit.js";
+import {Registration} from "./components/registration.js";
+import {Login} from "./components/login.js";
+import {AuthUtils} from "./utils/auth-utils";
+
 export class Router {
     constructor() {
         this.pageContentElement = document.getElementById('page');
@@ -22,7 +30,7 @@ export class Router {
                 ],
                 useLayout: false,
                 onload: () => {
-
+                    new Registration();
                 },
             },
             {
@@ -34,7 +42,7 @@ export class Router {
                 ],
                 useLayout: false,
                 onload: () => {
-
+                    new Login();
                 },
             },
             {
@@ -45,6 +53,7 @@ export class Router {
                 styles: [
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
+                    'css/common.css',
                     'css/pages/main.css',
                 ],
                 useLayout: 'templates/layout.html',
@@ -66,9 +75,7 @@ export class Router {
                     'css/layout.css',
                 ],
                 useLayout: 'templates/layout.html',
-                scripts: [
-
-                ],
+                scripts: [],
                 onload: () => {
                     new Layout();
                     new ExpensesCreate();
@@ -84,11 +91,10 @@ export class Router {
                     'css/layout.css',
                 ],
                 useLayout: 'templates/layout.html',
-                scripts: [
-
-                ],
+                scripts: [],
                 onload: () => {
                     new Layout();
+                    new ExpensesEdit();
                 },
             },
             {
@@ -100,6 +106,7 @@ export class Router {
                     'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
+                    'css/common.css',
                 ],
                 useLayout: 'templates/layout.html',
                 scripts: [
@@ -112,7 +119,7 @@ export class Router {
                 },
             },
             {
-                route: '#/income-create',
+                route: '#/incomes-create',
                 tabTitle: 'Создание категории',
                 pageTitle: 'Создание категории доходов',
                 template: 'templates/category-manipulations/create-category.html',
@@ -128,11 +135,11 @@ export class Router {
                 ],
                 onload: () => {
                     new Layout();
-                    new IncomeCreate();
+                    new IncomesCreate();
                 },
             },
             {
-                route: '#/income-edit',
+                route: '#/incomes-edit',
                 tabTitle: 'Редактирование категории',
                 pageTitle: 'Редактирование категории доходов',
                 template: 'templates/category-manipulations/edit-category.html',
@@ -141,76 +148,22 @@ export class Router {
                     'css/layout.css',
                 ],
                 useLayout: 'templates/layout.html',
-                scripts: [
-
-                ],
+                scripts: [],
                 onload: () => {
                     new Layout();
+                    new IncomesEdit();
                 },
             },
             {
-                route: '#/income-main',
+                route: '#/incomes-main',
                 tabTitle: 'Доходы',
                 pageTitle: 'Доходы',
-                template: 'templates/income/income-main.html',
-                styles: [
-                    'lib/fontawesome-free-6.6.0-web/css/all.min.css',
-                    'css/layout.css',
-                ],
-                useLayout: 'templates/layout.html',
-                scripts: [
-                    'lib/js/jquery-3.7.1.min.js',
-                    'lib/js/jquery.magnific-popup.min.js',
-                ],
-                onload: () => {
-                    new Layout();
-                    new IncomeMain();
-                },
-            },
-            {
-                route: '#/income-expenses-create',
-                tabTitle: 'Создание дохода/расхода',
-                pageTitle: 'Создание дохода/расхода',
-                template: 'templates/income-expenses/income-expenses-create.html',
-                styles: [
-                    'lib/fontawesome-free-6.6.0-web/css/all.min.css',
-                    'css/layout.css',
-                ],
-                useLayout: 'templates/layout.html',
-                scripts: [
-
-                ],
-                onload: () => {
-                    new Layout();
-                },
-            },
-            {
-                route: '#/income-expenses-edit',
-                tabTitle: 'Редактирование дохода/расхода',
-                pageTitle: 'Редактирование дохода/расхода',
-                template: 'templates/income-expenses/income-expenses-edit.html',
-                styles: [
-                    'lib/fontawesome-free-6.6.0-web/css/all.min.css',
-                    'css/layout.css',
-                ],
-                useLayout: 'templates/layout.html',
-                scripts: [
-
-                ],
-                onload: () => {
-                    new Layout();
-                },
-            },
-            {
-                route: '#/income-expenses-main',
-                tabTitle: 'Доходы и расходы',
-                pageTitle: 'Доходы и расходы',
-                template: 'templates/income-expenses/income-expenses-main.html',
+                template: 'templates/incomes/incomes-main.html',
                 styles: [
                     'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
-                    'css/pages/income-expenses-main.css',
+                    'css/common.css',
                 ],
                 useLayout: 'templates/layout.html',
                 scripts: [
@@ -219,7 +172,58 @@ export class Router {
                 ],
                 onload: () => {
                     new Layout();
-                    new IncomeExpensesMain();
+                    new IncomesMain();
+                },
+            },
+            {
+                route: '#/incomes-expenses-create',
+                tabTitle: 'Создание дохода/расхода',
+                pageTitle: 'Создание дохода/расхода',
+                template: 'templates/incomes-expenses/incomes-expenses-create.html',
+                styles: [
+                    'lib/fontawesome-free-6.6.0-web/css/all.min.css',
+                    'css/layout.css',
+                ],
+                useLayout: 'templates/layout.html',
+                scripts: [],
+                onload: () => {
+                    new Layout();
+                },
+            },
+            {
+                route: '#/incomes-expenses-edit',
+                tabTitle: 'Редактирование дохода/расхода',
+                pageTitle: 'Редактирование дохода/расхода',
+                template: 'templates/incomes-expenses/incomes-expenses-edit.html',
+                styles: [
+                    'lib/fontawesome-free-6.6.0-web/css/all.min.css',
+                    'css/layout.css',
+                ],
+                useLayout: 'templates/layout.html',
+                scripts: [],
+                onload: () => {
+                    new Layout();
+                },
+            },
+            {
+                route: '#/incomes-expenses-main',
+                tabTitle: 'Доходы и расходы',
+                pageTitle: 'Доходы и расходы',
+                template: 'templates/incomes-expenses/incomes-expenses-main.html',
+                styles: [
+                    'lib/css/magnific-popup.css',
+                    'lib/fontawesome-free-6.6.0-web/css/all.min.css',
+                    'css/layout.css',
+                    'css/common.css',
+                ],
+                useLayout: 'templates/layout.html',
+                scripts: [
+                    'lib/js/jquery-3.7.1.min.js',
+                    'lib/js/jquery.magnific-popup.min.js',
+                ],
+                onload: () => {
+                    new Layout();
+                    new IncomesExpensesMain();
                 },
             }
         ]
@@ -227,41 +231,28 @@ export class Router {
 
     prepareNewRouteStyles(newRouteObj) {
         let styles = document.head.getElementsByTagName('link');
-        for (let style of styles) {
-            if (!style.href.match(/.*lib\/css\/bootstrap\.min\.css/)) {
-                style.remove();
+        for (let i = styles.length - 1; i >= 0; i--) {
+            if (!styles[i].href.match(/.*lib\/css\/bootstrap\.min\.css/)) {
+                styles[i].remove();
             }
         }
 
         newRouteObj.styles.forEach(style => {
-            let styleElement = document.createElement('link');
-            styleElement.setAttribute('rel', 'stylesheet');
-            styleElement.setAttribute('href', style);
-            document.head.appendChild(styleElement);
+            FileUtils.addNewStyle(style);
         });
     }
 
     async prepareNewRouteScripts(newRouteObj) {
         let scripts = document.body.getElementsByTagName('script');
-        for (let script of scripts) {
-            if (!script.src.match(/.*lib\/js\/bootstrap\..*min\.js/)) {
-                script.remove();
+        for (let i = scripts.length - 1; i >= 0; i--) {
+            if (!scripts[i].src.match(/.*lib\/js\/bootstrap\..*min\.js/)) {
+                scripts[i].remove();
             }
         }
 
         for (let script of newRouteObj.scripts) {
-            await this.addNewScript(script);
+            await FileUtils.addNewScript(script);
         }
-    }
-
-    addNewScript(script) {
-        return new Promise((resolve, reject) => {
-            let scriptElement = document.createElement('script');
-            scriptElement.src = script;
-            scriptElement.onload = () => {resolve('Script loaded: ' + script)};
-            scriptElement.onerror = () => {reject('Failed load script: ' + script)};
-            document.body.appendChild(scriptElement);
-        })
     }
 
     async openNewRoute() {
@@ -290,7 +281,11 @@ export class Router {
                 newRouteObj.onload();
             }
         } else {
-            window.location.hash = '#/';
+            if (AuthUtils.getAuthTokensInfo().accessToken) {
+                window.location.hash = '#/';
+            } else {
+                window.location.hash = '#/login';
+            }
         }
     }
 }

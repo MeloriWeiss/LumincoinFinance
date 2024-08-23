@@ -2,6 +2,7 @@ export class Layout {
     constructor() {
         this.sidebar = document.querySelector('#sidebar');
         this.sidebarToggler = document.querySelector('.sidebar_toggler');
+        document.getElementById('logout').onclick = () => this.logout();
 
         this.sidebarToggler.addEventListener('click', () => {
             this.sidebar.classList.toggle('show');
@@ -24,5 +25,10 @@ export class Layout {
             this.sidebar.classList.add('show');
             this.sidebarToggler.classList.add('sidebar-is-active');
         }
+    }
+
+    logout() {
+        // fetch
+        window.location.hash = '#/login';
     }
 }
