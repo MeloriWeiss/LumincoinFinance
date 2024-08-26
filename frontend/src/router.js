@@ -32,6 +32,7 @@ export class Router {
                 onload: () => {
                     new Registration();
                 },
+                needAuthorization: false,
             },
             {
                 route: '#/login',
@@ -44,6 +45,7 @@ export class Router {
                 onload: () => {
                     new Login();
                 },
+                needAuthorization: false,
             },
             {
                 route: '#/',
@@ -64,6 +66,7 @@ export class Router {
                     new Layout();
                     new Main();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/expenses-create',
@@ -80,6 +83,7 @@ export class Router {
                     new Layout();
                     new ExpensesCreate();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/expenses-edit',
@@ -96,6 +100,7 @@ export class Router {
                     new Layout();
                     new ExpensesEdit();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/expenses-main',
@@ -117,6 +122,7 @@ export class Router {
                     new Layout();
                     new ExpensesMain();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/incomes-create',
@@ -137,6 +143,7 @@ export class Router {
                     new Layout();
                     new IncomesCreate();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/incomes-edit',
@@ -153,6 +160,7 @@ export class Router {
                     new Layout();
                     new IncomesEdit();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/incomes-main',
@@ -174,6 +182,7 @@ export class Router {
                     new Layout();
                     new IncomesMain();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/incomes-expenses-create',
@@ -189,6 +198,7 @@ export class Router {
                 onload: () => {
                     new Layout();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/incomes-expenses-edit',
@@ -204,6 +214,7 @@ export class Router {
                 onload: () => {
                     new Layout();
                 },
+                needAuthorization: true,
             },
             {
                 route: '#/incomes-expenses-main',
@@ -225,6 +236,7 @@ export class Router {
                     new Layout();
                     new IncomesExpensesMain();
                 },
+                needAuthorization: true,
             }
         ]
     }
@@ -257,8 +269,13 @@ export class Router {
 
     async openNewRoute() {
         const newRouteName = window.location.hash;
-        const newRouteObj = this.routes.find(route => route.route === newRouteName);
+        let newRouteObj = this.routes.find(route => route.route === newRouteName);
         if (newRouteObj) {
+            if (newRouteObj.needAuthorization && !AuthUtils.userIsAuthorized()) {
+                return window.location.hash = '#/login';
+            } else if (!newRouteObj.needAuthorization && AuthUtils.userIsAuthorized()) {
+                return window.location.hash = '#/';
+            }
             if (newRouteObj.useLayout) {
                 this.pageContentElement.innerHTML = await fetch(newRouteObj.useLayout).then(response => response.text());
                 this.pageContentElement = document.getElementById('content');
@@ -281,7 +298,7 @@ export class Router {
                 newRouteObj.onload();
             }
         } else {
-            if (AuthUtils.getAuthTokensInfo().accessToken) {
+            if (AuthUtils.userIsAuthorized()) {
                 window.location.hash = '#/';
             } else {
                 window.location.hash = '#/login';

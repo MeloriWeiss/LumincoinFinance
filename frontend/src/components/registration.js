@@ -3,6 +3,8 @@ import {HttpUtils} from "../utils/http-utils";
 
 export class Registration {
     constructor() {
+        this.commonErrorElement = document.getElementById('common-error');
+
         this.validations = [
             {
                 name: 'full-name',
@@ -81,6 +83,7 @@ export class Registration {
     }
 
     async registration() {
+        let error = false;
         const name = this.validations.find(validation => validation.name === 'full-name').element.value.split(' ')[1];
         const lastName = this.validations.find(validation => validation.name === 'full-name').element.value.split(' ')[0];
         const email = this.validations.find(validation => validation.name === 'email').element.value;
@@ -96,19 +99,22 @@ export class Registration {
         if (result && result.user && result.user.id && result.user.email && result.user.name && result.user.lastName) {
             AuthUtils.setUserInfo(result.user);
         } else {
-            alert('Не удалось запросить данные');
+            error = true;
+            this.commonErrorElement.classList.add('d-block');
         }
 
-        result = await HttpUtils.request('/login', 'POST', {
-            email: email,
-            password: password,
-            rememberMe: false,
-        });
-        if (result && result.tokens && result.tokens.accessToken && result.tokens.refreshToken && result.user) {
-            AuthUtils.setAuthInfo(result.tokens.accessToken, result.tokens.refreshToken, result.user);
-            window.location.hash = '#/';
-        } else {
-            alert('Не удалось запросить данные');
+        if (!error) {
+            result = await HttpUtils.request('/login', 'POST', {
+                email: email,
+                password: password,
+                rememberMe: false,
+            });
+            if (result && result.tokens && result.tokens.accessToken && result.tokens.refreshToken && result.user) {
+                AuthUtils.setAuthInfo(result.tokens.accessToken, result.tokens.refreshToken, result.user);
+                window.location.hash = '#/';
+            } else {
+                alert('Не удалось запросить данные');
+            }
         }
     }
 }

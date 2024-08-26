@@ -33,4 +33,8 @@ export class AuthUtils {
     static resetAuthInfo() {
         localStorage.clear();
     }
+
+    static userIsAuthorized() {
+        return Boolean(AuthUtils.getAuthTokensInfo().accessToken);
+    }
 }
