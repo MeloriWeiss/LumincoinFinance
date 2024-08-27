@@ -37,4 +37,19 @@ export class AuthUtils {
     static userIsAuthorized() {
         return Boolean(AuthUtils.getAuthTokensInfo().accessToken);
     }
+
+    static processUnauthorizedRequest() {
+        const refreshToken = AuthUtils.getAuthTokensInfo().refreshToken;
+        if (refreshToken) {
+            let result = HttpUtils.request('/refresh', 'POST', {
+                refreshToken: refreshToken,
+            });
+            if (result) {
+                AuthUtils.setAuthInfo(result.tokens.accessToken, result.tokens.refreshToken);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }

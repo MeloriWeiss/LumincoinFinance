@@ -13,6 +13,10 @@ export class HttpUtils {
         if (data) {
             params.body = JSON.stringify(data);
         }
+        const token = AuthUtils.getAuthTokensInfo().accessToken;
+        if (token) {
+            params.headers['x-auth-token'] = token;
+        }
         try {
             let response = await fetch(config.api + url, params);
             if (response.status >= 200 && response.status < 300) {
@@ -20,14 +24,12 @@ export class HttpUtils {
                 if (result) {
                     return result;
                 }
-            } else {
-                if (response.status === 401) {
-                    const refreshToken = AuthUtils.getAuthTokensInfo().refreshToken;
-                    if (refreshToken) {
-                        return await this.request('/refresh', 'POST', {
-                            refreshToken: refreshToken,
-                        })
-                    }
+            } else if (response.status === 401) {
+                let result = AuthUtils.processUnauthorizedRequest();
+                if (result) {
+                    return await this.request(url, method, data);
+                } else {
+                    return null;
                 }
             }
         } catch (e) {

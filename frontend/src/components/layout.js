@@ -26,6 +26,7 @@ export class Layout {
         });
 
         this.toggleSidebar();
+        this.getBalance().then();
     }
 
     toggleSidebar() {
@@ -53,6 +54,16 @@ export class Layout {
             }
         } else {
             return alert('Ошибка выхода');
+        }
+    }
+
+    async getBalance() {
+        let balanceElement = document.getElementById('balance');
+        if (balanceElement) {
+            let result = await HttpUtils.request('/balance', 'GET');
+            if (result && result.hasOwnProperty('balance')) {
+                balanceElement.innerText = result.balance;
+            }
         }
     }
 }
