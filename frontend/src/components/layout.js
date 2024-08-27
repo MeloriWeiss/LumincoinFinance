@@ -11,9 +11,9 @@ export class Layout {
         this.sidebarToggler = document.querySelector('.sidebar_toggler');
         document.getElementById('logout').onclick = () => this.logout();
 
-        const fullName = `${AuthUtils.getAuthUserInfo().name} ${AuthUtils.getAuthUserInfo().lastName}`;
-        if (fullName) {
-            document.getElementById('full-name').innerHTML = fullName;
+        if (AuthUtils.getAuthUserInfo().name && AuthUtils.getAuthUserInfo().lastName) {
+            document.getElementById('full-name').innerHTML =
+                `${AuthUtils.getAuthUserInfo().name} ${AuthUtils.getAuthUserInfo().lastName}`;
         }
 
         this.sidebarToggler.addEventListener('click', () => {
