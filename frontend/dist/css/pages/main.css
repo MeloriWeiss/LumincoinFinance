@@ -1,0 +1,59 @@
+.piechart {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-image: conic-gradient(
+            rgb(13 110 253) 70deg,
+            rgb(25 135 84) 70deg 125deg,
+            rgb(255 193 7) 125deg 145deg,
+            rgb(255 114 0) 145deg 245deg,
+            rgb(220 53 69) 245deg 360deg
+    );
+}
+
+.state-block {
+    display: flex;
+    align-items: center;
+    line-height: 0.3;
+}
+
+.rectangle {
+    width: 35px;
+    height: 10px;
+    margin-right: 8px;
+}
+
+.bg-orange {
+    background-color: #ff7200;
+}
+
+.vertical-line {
+    border-right: 1px solid lightgray;
+}
+
+input {
+    width: 40px;
+}
+
+.chart {
+    max-width: 600px;
+    max-height: 600px;
+}
+
+.chart-container {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 1400px) {
+    .vertical-line {
+        border: none;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .chart-container {
+        max-width: 350px;
+    }
+}

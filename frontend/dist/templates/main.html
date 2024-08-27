@@ -1,0 +1,47 @@
+<div class="container-lg p-0">
+    <div class="text-center d-flex align-items-center row row-gap-3 col-xxl-10 col-12">
+        <div class="col">
+            <a class="btn btn-secondary w-100" href="#">Сегодня</a>
+        </div>
+        <div class="col">
+            <a class="btn btn-outline-secondary w-100" href="#">Неделя</a>
+        </div>
+        <div class="col">
+            <a class="btn btn-outline-secondary w-100" href="#">Месяц</a>
+        </div>
+        <div class="col">
+            <a class="btn btn-outline-secondary w-100" href="#">Год</a>
+        </div>
+        <div class="col">
+            <a class="btn btn-outline-secondary w-100" href="#">Все</a>
+        </div>
+        <div class="col">
+            <a class="btn btn-outline-secondary w-100" href="#">Интервал</a>
+        </div>
+        <div class="col d-flex">
+            c
+            <input href="#" class="date-input text-secondary ms-4 me-4 border-0 text-decoration-underline h-100" placeholder="Дата">
+            по
+            <input href="#" class="date-input text-secondary ms-4 border-0 text-decoration-underline h-100" placeholder="Дата">
+        </div>
+    </div>
+
+    <div class="container text-center pt-3 mt-5">
+        <div class="row row-cols-xxl-2 row-cols-1">
+            <div class="col mb-xxl-0 mb-5">
+                <h3 class="text-primary-emphasis mb-3">Доходы</h3>
+                <div class="vertical-line">
+                    <div class="pb-4 d-flex justify-content-center chart-container">
+                        <canvas id="incomes-chart" class="chart col"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <h3 class="text-primary-emphasis mb-3">Расходы</h3>
+                <div class="pb-4 d-flex justify-content-center chart-container">
+                    <canvas id="expenses-chart" class="chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
