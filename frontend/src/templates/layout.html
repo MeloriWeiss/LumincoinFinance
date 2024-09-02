@@ -30,9 +30,9 @@
                 </div>
             </div>
         </div>
-        <div class="ps-3 text-start">
-            Баланс: <a href="#" id="balance" class="text-primary text-decoration-none"></a>
-        </div>
+        <a href="#balance-popup" class="ps-3 text-start text-primary-emphasis text-decoration-none fw-medium" role="button" id="balance-element">
+            Баланс: <span id="balance" class="text-primary text-decoration-none ms-2"></span>
+        </a>
         <hr>
         <div class="ps-3 pe-3 pb-5">
             <div class="profile d-flex align-items-center dropdown" role="button">
@@ -63,4 +63,18 @@
     <div></div>
     <div></div>
     <div></div>
+</div>
+
+<div id="balance-popup" class="mfp-hide">
+    <div class="ps-4 pe-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 mx-auto">
+        <div class="card p-lg-4 p-md-3 p-sm-2 p-1 text-center text-primary-emphasis fw-medium">
+            <p class="mt-3 col-11 ms-auto me-auto">
+                <input type="text" class="form-control" id="edit-balance">
+            </p>
+            <div class="d-flex align-items-center justify-content-center flex-wrap gap-3 mb-3">
+                <button class="btn btn-success mfp-close confirm-button" id="save-balance">Сохранить</button>
+                <button class="btn btn-danger mfp-close not-delete confirm-button">Отменить</button>
+            </div>
+        </div>
+    </div>
 </div>

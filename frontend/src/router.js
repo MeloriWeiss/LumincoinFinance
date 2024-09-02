@@ -1,16 +1,17 @@
 import {Layout} from "./components/layout.js";
-import {IncomesExpensesMain} from "./components/incomes-expenses-main.js";
 import {Main} from "./components/main.js";
-import {IncomesMain} from "./components/incomes-main.js";
-import {ExpensesMain} from "./components/expenses-main.js";
-import {ExpensesCreate} from "./components/expenses-create.js";
-import {IncomesCreate} from "./components/incomes-create.js";
+import {IncomesMain} from "./components/incomes/incomes-main.js";
+import {ExpensesMain} from "./components/expenses/expenses-main.js";
+import {ExpensesCreate} from "./components/expenses/expenses-create.js";
+import {IncomesCreate} from "./components/incomes/incomes-create.js";
 import {FileUtils} from "./utils/file-utils.js";
-import {IncomesEdit} from "./components/incomes-edit.js";
-import {ExpensesEdit} from "./components/expenses-edit.js";
-import {Registration} from "./components/registration.js";
-import {Login} from "./components/login.js";
+import {IncomesEdit} from "./components/incomes/incomes-edit.js";
+import {ExpensesEdit} from "./components/expenses/expenses-edit.js";
+import {Registration} from "./components/auth/registration.js";
+import {Login} from "./components/auth/login.js";
 import {AuthUtils} from "./utils/auth-utils";
+import {IncomesExpensesCreate} from "./components/incomes-expenses/incomes-expenses-create.js";
+import {IncomesExpensesMain} from "./components/incomes-expenses/incomes-expenses-main.js";
 
 export class Router {
     constructor() {
@@ -53,6 +54,7 @@ export class Router {
                 pageTitle: 'Главная',
                 template: 'templates/main.html',
                 styles: [
+                    'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
                     'css/common.css',
@@ -60,6 +62,7 @@ export class Router {
                 ],
                 useLayout: 'templates/layout.html',
                 scripts: [
+                    'lib/js/jquery.magnific-popup.min.js',
                     'lib/js/chart.js',
                 ],
                 onload: () => {
@@ -74,11 +77,14 @@ export class Router {
                 pageTitle: 'Создание категории расходов',
                 template: 'templates/category-manipulations/create-category.html',
                 styles: [
+                    'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
                 ],
                 useLayout: 'templates/layout.html',
-                scripts: [],
+                scripts: [
+                    'lib/js/jquery.magnific-popup.min.js',
+                ],
                 onload: () => {
                     new Layout();
                     new ExpensesCreate();
@@ -91,11 +97,14 @@ export class Router {
                 pageTitle: 'Редактирование категории расходов',
                 template: 'templates/category-manipulations/edit-category.html',
                 styles: [
+                    'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
                 ],
                 useLayout: 'templates/layout.html',
-                scripts: [],
+                scripts: [
+                    'lib/js/jquery.magnific-popup.min.js',
+                ],
                 onload: () => {
                     new Layout();
                     new ExpensesEdit();
@@ -151,11 +160,14 @@ export class Router {
                 pageTitle: 'Редактирование категории доходов',
                 template: 'templates/category-manipulations/edit-category.html',
                 styles: [
+                    'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
                 ],
                 useLayout: 'templates/layout.html',
-                scripts: [],
+                scripts: [
+                    'lib/js/jquery.magnific-popup.min.js',
+                ],
                 onload: () => {
                     new Layout();
                     new IncomesEdit();
@@ -190,13 +202,23 @@ export class Router {
                 pageTitle: 'Создание дохода/расхода',
                 template: 'templates/incomes-expenses/incomes-expenses-create.html',
                 styles: [
+                    'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
+                    'lib/css/jquery-ui.min.css',
+                    'lib/css/select2.min.css',
+                    'lib/css/select2-bootstrap4.min.css',
+                    'css/common.css',
                 ],
                 useLayout: 'templates/layout.html',
-                scripts: [],
+                scripts: [
+                    'lib/js/jquery.magnific-popup.min.js',
+                    'lib/js/jquery-ui.min.js',
+                    'lib/js/select2.full.min.js',
+                ],
                 onload: () => {
                     new Layout();
+                    new IncomesExpensesCreate();
                 },
                 needAuthorization: true,
             },
@@ -206,11 +228,19 @@ export class Router {
                 pageTitle: 'Редактирование дохода/расхода',
                 template: 'templates/incomes-expenses/incomes-expenses-edit.html',
                 styles: [
+                    'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
+                    'lib/css/jquery-ui.min.css',
+                    'lib/css/select2.min.css',
+                    'lib/css/select2-bootstrap4.min.css',
                 ],
                 useLayout: 'templates/layout.html',
-                scripts: [],
+                scripts: [
+                    'lib/js/jquery.magnific-popup.min.js',
+                    'lib/js/jquery-ui.min.js',
+                    'lib/js/select2.full.min.js',
+                ],
                 onload: () => {
                     new Layout();
                 },
@@ -268,7 +298,7 @@ export class Router {
     }
 
     async openNewRoute() {
-        const newRouteName = window.location.hash;
+        const newRouteName = window.location.hash.split('?')[0];
         let newRouteObj = this.routes.find(route => route.route === newRouteName);
         if (newRouteObj) {
             if (newRouteObj.needAuthorization && !AuthUtils.userIsAuthorized()) {

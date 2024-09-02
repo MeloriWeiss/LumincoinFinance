@@ -7,6 +7,8 @@ export class Main {
 
         this.createChart(incomesChart, this.incomesChartData);
         this.createChart(expensesChart, this.expensesChartData);
+
+        document.getElementById('main-button').classList.add('active');
     }
 
     setChartsData() {

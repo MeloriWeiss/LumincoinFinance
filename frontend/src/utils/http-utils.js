@@ -17,23 +17,20 @@ export class HttpUtils {
         if (token) {
             params.headers['x-auth-token'] = token;
         }
-        try {
-            let response = await fetch(config.api + url, params);
-            if (response.status >= 200 && response.status < 300) {
-                const result = await response.json();
-                if (result) {
-                    return result;
-                }
-            } else if (response.status === 401) {
-                let result = AuthUtils.processUnauthorizedRequest();
-                if (result) {
-                    return await this.request(url, method, data);
-                } else {
-                    return null;
-                }
+        let response = await fetch(config.api + url, params);
+        if (response.status >= 200 && response.status < 300) {
+            const result = await response.json();
+            if (result) {
+                return result;
             }
-        } catch (e) {
-            return false;
+        } else if (response.status === 401) {
+            let result = await AuthUtils.processUnauthorizedRequest();
+            if (result) {
+                return await this.request(url, method, data);
+            } else {
+                AuthUtils.resetAuthInfo();
+                return null;
+            }
         }
     }
 }

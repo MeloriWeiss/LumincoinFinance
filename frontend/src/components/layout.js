@@ -11,7 +11,7 @@ export class Layout {
         this.sidebarToggler = document.querySelector('.sidebar_toggler');
         document.getElementById('logout').onclick = () => this.logout();
 
-        if (AuthUtils.getAuthUserInfo().name && AuthUtils.getAuthUserInfo().lastName) {
+        if (AuthUtils.getAuthUserInfo()) {
             document.getElementById('full-name').innerHTML =
                 `${AuthUtils.getAuthUserInfo().name} ${AuthUtils.getAuthUserInfo().lastName}`;
         }
@@ -25,8 +25,14 @@ export class Layout {
             this.toggleSidebar();
         });
 
+        this.balanceElement = document.getElementById('balance');
+        $('#balance-element').magnificPopup({type: 'inline'});
+
         this.toggleSidebar();
         this.getBalance().then();
+
+        document.getElementById('save-balance').onclick = () => this.changeBalance();
+        this.changeBalanceInput = document.getElementById('edit-balance');
     }
 
     toggleSidebar() {
@@ -58,12 +64,23 @@ export class Layout {
     }
 
     async getBalance() {
-        let balanceElement = document.getElementById('balance');
-        if (balanceElement) {
+        if (this.balanceElement) {
             let result = await HttpUtils.request('/balance', 'GET');
             if (result && result.hasOwnProperty('balance')) {
-                balanceElement.innerText = result.balance;
+                this.balanceElement.innerText = result.balance;
+                this.changeBalanceInput.value = result.balance;
             }
+        }
+    }
+
+    async changeBalance() {
+        let result = await HttpUtils.request('/balance', 'PUT', {
+            newBalance: this.changeBalanceInput.value
+        });
+        if (result) {
+            this.balanceElement.innerText = result.balance;
+        } else {
+            alert('Не удалось изменить баланс');
         }
     }
 }

@@ -109,6 +109,27 @@
     display: none;
 }
 
+#avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    background: lightgray;
+}
+
+#full-name {
+    white-space: normal;
+}
+
+.sidebar-links {
+    color: #052c65 !important;
+}
+
+.sidebar-links.active {
+    color: white !important;
+}
+
 @media screen and (max-width: 992px) {
     .sidebar_toggler {
         display: flex;

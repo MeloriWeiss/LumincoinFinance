@@ -7,11 +7,11 @@
             </a>
         </div>
         <div class="nav nav-pills flex-column mb-auto mt-5 pt-3 ps-3 pe-3 text-start">
-            <a href="/#/" class="nav-link pt-2 pb-2 active" aria-current="page">
+            <a href="/#/" id="main-button" class="sidebar-links nav-link pt-2 pb-2" aria-current="page">
                 <i class="fa-solid fa-house-chimney me-2"></i>
                 Главная
             </a>
-            <a href="/#/incomes-expenses-main" class="nav-link pt-2 pb-2 text-primary-emphasis" aria-current="page">
+            <a href="/#/incomes-expenses-main" id="incomes-expenses-button" class="sidebar-links nav-link pt-2 pb-2" aria-current="page">
                 <i class="fa-regular fa-money-bill-1 me-2"></i>
                 Доходы & Расходы
             </a>
@@ -30,19 +30,18 @@
                 </div>
             </div>
         </div>
-        <div class="ps-3 text-start">
-            Баланс: <a href="#" id="balance" class="text-primary text-decoration-none">нет данных</a>
-        </div>
+        <a href="#balance-popup" class="ps-3 text-start text-primary-emphasis text-decoration-none fw-medium" role="button" id="balance-element">
+            Баланс: <span id="balance" class="text-primary text-decoration-none ms-2"></span>
+        </a>
         <hr>
         <div class="ps-3 pe-3 pb-5">
             <div class="profile d-flex align-items-center dropdown" role="button">
                 <div class="dropdown-toggle w-100 d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div id="avatar" class="d-flex justify-content-center align-items-center"
-                         style="width: 40px; height: 40px; border-radius: 50%; background: lightgray;">
+                    <div id="avatar" class="d-flex justify-content-center align-items-center">
                         <i class="fa-regular fa-user fs-5"></i>
                     </div>
-                    <div id="full-name" class="ms-3">
-                        Евгений Назаров
+                    <div id="full-name" class="ms-3 text-start">
+
                     </div>
                 </div>
                 <ul class="dropdown-menu">
@@ -66,84 +65,16 @@
     <div></div>
 </div>
 
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" href="../../lib/css/bootstrap.min.css">-->
-<!--    <link rel="stylesheet" href="../../lib/fontawesome-free-6.6.0-web/css/all.min.css">-->
-<!--    <link rel="stylesheet" href="../styles/layout.css">-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div class="d-flex">-->
-<!--    <aside id="sidebar" class="border border-secondary-subtle text-center min-vh-100 d-flex flex-column flex-shrink-0"-->
-<!--           style="width: 240px;">-->
-<!--        <div class="pt-5 pb-4 border-bottom">-->
-<!--            <a href="#" class="logo">-->
-<!--                <img src="../static/images/logo.png" alt="Логотип" class="w-50">-->
-<!--            </a>-->
-<!--        </div>-->
-<!--        <div class="nav nav-pills flex-column mb-auto mt-5 pt-3 ps-3 pe-3 text-start">-->
-<!--            <a href="#" class="nav-link pt-2 pb-2 active" aria-current="page">-->
-<!--                <i class="fa-solid fa-house-chimney me-2"></i>-->
-<!--                Главная-->
-<!--            </a>-->
-<!--            <a href="#" class="nav-link pt-2 pb-2 text-primary-emphasis" aria-current="page">-->
-<!--                <i class="fa-regular fa-money-bill-1 me-2"></i>-->
-<!--                Доходы & Расходы-->
-<!--            </a>-->
-<!--            <a href="#collapse-category" class="category-collapse-element nav-link pt-2 pb-2 d-flex justify-content-between align-items-center text-start rounded-bottom-0 collapsed"-->
-<!--               aria-current="page"-->
-<!--               data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse-category">-->
-<!--                Категории-->
-<!--                <i class="fa-solid fa-chevron-down collapse-arrow"></i>-->
-<!--            </a>-->
-<!--            <div class="collapse" id="collapse-category">-->
-<!--                <div class="bg-primary rounded-bottom-3">-->
-<!--                    <a href="/#/incomes" class="nav-link pt-2 pb-2 collapse-element collapse-element-active middle-collapse-element"-->
-<!--                       aria-current="page">Доходы</a>-->
-<!--                    <a href="/#/expenses" class="nav-link pt-2 pb-2 collapse-element"-->
-<!--                       aria-current="page">Расходы</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="ps-3 text-start">-->
-<!--            Баланс: <a href="#" id="balance" class="text-primary text-decoration-none">нет данных</a>-->
-<!--        </div>-->
-<!--        <hr>-->
-<!--        <div class="ps-3 pe-3 pb-5">-->
-<!--            <div class="profile d-flex align-items-center">-->
-<!--                <div id="avatar" class="d-flex justify-content-center align-items-center"-->
-<!--                     style="width: 40px; height: 40px; border-radius: 50%; background: lightgray;">-->
-<!--                    <i class="fa-regular fa-user fs-5"></i>-->
-<!--                </div>-->
-<!--                <div id="full-name" class="ms-3">-->
-<!--                    Евгений Назаров-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </aside>-->
-
-<!--    <div class="p-sm-5 p-4 w-100">-->
-<!--        <h1 id="title" class="text-primary-emphasis mt-3 mb-5">Шаблон</h1>-->
-<!--        <div id="content">-->
-
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--<div class="sidebar_toggler sidebar-is-active">-->
-<!--    <div></div>-->
-<!--    <div></div>-->
-<!--    <div></div>-->
-<!--</div>-->
-
-<!--<script src="../../lib/js/bootstrap.min.js"></script>-->
-<!--<script src="../components/layout.js"></script>-->
-<!--<script src="../app.js" type="module"></script>-->
-<!--</body>-->
-<!--</html>-->
+<div id="balance-popup" class="mfp-hide">
+    <div class="ps-4 pe-4 col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 mx-auto">
+        <div class="card p-lg-4 p-md-3 p-sm-2 p-1 text-center text-primary-emphasis fw-medium">
+            <p class="mt-3 col-11 ms-auto me-auto">
+                <input type="text" class="form-control" id="edit-balance">
+            </p>
+            <div class="d-flex align-items-center justify-content-center flex-wrap gap-3 mb-3">
+                <button class="btn btn-success mfp-close confirm-button" id="save-balance">Сохранить</button>
+                <button class="btn btn-danger mfp-close not-delete confirm-button">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>

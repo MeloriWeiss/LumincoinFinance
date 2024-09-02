@@ -1,8 +1,20 @@
+import {AuthUtils} from "../utils/auth-utils";
+import {HttpUtils} from "../utils/http-utils";
+
 export class Layout {
     constructor() {
+        this.initLayout();
+    }
+
+    initLayout() {
         this.sidebar = document.querySelector('#sidebar');
         this.sidebarToggler = document.querySelector('.sidebar_toggler');
         document.getElementById('logout').onclick = () => this.logout();
+
+        if (AuthUtils.getAuthUserInfo()) {
+            document.getElementById('full-name').innerHTML =
+                `${AuthUtils.getAuthUserInfo().name} ${AuthUtils.getAuthUserInfo().lastName}`;
+        }
 
         this.sidebarToggler.addEventListener('click', () => {
             this.sidebar.classList.toggle('show');
@@ -13,7 +25,14 @@ export class Layout {
             this.toggleSidebar();
         });
 
+        this.balanceElement = document.getElementById('balance');
+        $('#balance-element').magnificPopup({type: 'inline'});
+
         this.toggleSidebar();
+        this.getBalance().then();
+
+        document.getElementById('save-balance').onclick = () => this.changeBalance();
+        this.changeBalanceInput = document.getElementById('edit-balance');
     }
 
     toggleSidebar() {
@@ -27,8 +46,41 @@ export class Layout {
         }
     }
 
-    logout() {
-        // fetch
-        window.location.hash = '#/login';
+    async logout() {
+        let refreshToken = AuthUtils.getAuthTokensInfo().refreshToken;
+        if (refreshToken) {
+            let result = await HttpUtils.request('/logout', 'POST', {
+                refreshToken: refreshToken,
+            });
+            if (result) {
+                AuthUtils.resetAuthInfo();
+                return window.location.hash = '#/login';
+            } else {
+                return alert('Ошибка выхода');
+            }
+        } else {
+            return alert('Ошибка выхода');
+        }
+    }
+
+    async getBalance() {
+        if (this.balanceElement) {
+            let result = await HttpUtils.request('/balance', 'GET');
+            if (result && result.hasOwnProperty('balance')) {
+                this.balanceElement.innerText = result.balance;
+                this.changeBalanceInput.value = result.balance;
+            }
+        }
+    }
+
+    async changeBalance() {
+        let result = await HttpUtils.request('/balance', 'PUT', {
+            newBalance: this.changeBalanceInput.value
+        });
+        if (result) {
+            this.balanceElement.innerText = result.balance;
+        } else {
+            alert('Не удалось изменить баланс');
+        }
     }
 }

@@ -1,4 +1,4 @@
-import {HttpUtils} from "../utils/http-utils";
+import {HttpUtils} from "../../utils/http-utils";
 
 export class IncomesExpensesMain {
     constructor() {

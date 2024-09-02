@@ -38,10 +38,10 @@ export class AuthUtils {
         return Boolean(AuthUtils.getAuthTokensInfo().accessToken);
     }
 
-    static processUnauthorizedRequest() {
+    static async processUnauthorizedRequest() {
         const refreshToken = AuthUtils.getAuthTokensInfo().refreshToken;
         if (refreshToken) {
-            let result = HttpUtils.request('/refresh', 'POST', {
+            let result = await HttpUtils.request('/refresh', 'POST', {
                 refreshToken: refreshToken,
             });
             if (result) {
