@@ -19,7 +19,16 @@
 }
 
 .date-input {
-    width: 40px;
+    width: 87px;
+    outline: none !important;
+}
+
+.date-input::placeholder {
+    padding-left: 19px;
+}
+
+.date-input:disabled {
+    background-color: transparent;
 }
 
 .select2-selection {

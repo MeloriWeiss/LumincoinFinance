@@ -19,5 +19,41 @@
 }
 
 .date-input {
-    width: 40px;
+    width: 87px;
+    outline: none !important;
+}
+
+.date-input::placeholder {
+    padding-left: 19px;
+}
+
+.date-input:disabled {
+    background-color: transparent;
+}
+
+.select2-selection {
+    min-height: 41.6px;
+}
+
+.select2-container--bootstrap4 .select2-selection {
+    border: 1px solid #6C757DFF !important;
+    border-radius: 0.375rem !important;
+    margin-bottom: .5rem !important;
+    padding: .5rem 1rem .5rem !important;
+    height: auto !important;
+}
+
+.select2-selection.select2-selection--single {
+    margin: 0 !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+    padding-left: 0;
+    line-height: 1.5rem;
+    color: #212529;
+    font-size: 1rem;
+}
+
+b {
+    display: none;
 }

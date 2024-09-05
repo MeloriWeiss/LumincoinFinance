@@ -31,10 +31,6 @@
     border-right: 1px solid lightgray;
 }
 
-.date-input {
-    width: 40px;
-}
-
 .chart {
     max-width: 600px;
     max-height: 600px;

@@ -12,6 +12,7 @@ import {Login} from "./components/auth/login.js";
 import {AuthUtils} from "./utils/auth-utils";
 import {IncomesExpensesCreate} from "./components/incomes-expenses/incomes-expenses-create.js";
 import {IncomesExpensesMain} from "./components/incomes-expenses/incomes-expenses-main.js";
+import {IncomesExpensesEdit} from "./components/incomes-expenses/incomes-expenses-edit.js";
 
 export class Router {
     constructor() {
@@ -57,12 +58,14 @@ export class Router {
                     'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
+                    'lib/css/jquery-ui.min.css',
                     'css/common.css',
                     'css/pages/main.css',
                 ],
                 useLayout: 'templates/layout.html',
                 scripts: [
                     'lib/js/jquery.magnific-popup.min.js',
+                    'lib/js/jquery-ui.min.js',
                     'lib/js/chart.js',
                 ],
                 onload: () => {
@@ -212,6 +215,7 @@ export class Router {
                 ],
                 useLayout: 'templates/layout.html',
                 scripts: [
+                    'lib/js/jquery-3.7.1.min.js',
                     'lib/js/jquery.magnific-popup.min.js',
                     'lib/js/jquery-ui.min.js',
                     'lib/js/select2.full.min.js',
@@ -234,15 +238,18 @@ export class Router {
                     'lib/css/jquery-ui.min.css',
                     'lib/css/select2.min.css',
                     'lib/css/select2-bootstrap4.min.css',
+                    'css/common.css',
                 ],
                 useLayout: 'templates/layout.html',
                 scripts: [
+                    'lib/js/jquery-3.7.1.min.js',
                     'lib/js/jquery.magnific-popup.min.js',
                     'lib/js/jquery-ui.min.js',
                     'lib/js/select2.full.min.js',
                 ],
                 onload: () => {
                     new Layout();
+                    new IncomesExpensesEdit();
                 },
                 needAuthorization: true,
             },
@@ -255,12 +262,14 @@ export class Router {
                     'lib/css/magnific-popup.css',
                     'lib/fontawesome-free-6.6.0-web/css/all.min.css',
                     'css/layout.css',
+                    'lib/css/jquery-ui.min.css',
                     'css/common.css',
                 ],
                 useLayout: 'templates/layout.html',
                 scripts: [
                     'lib/js/jquery-3.7.1.min.js',
                     'lib/js/jquery.magnific-popup.min.js',
+                    'lib/js/jquery-ui.min.js',
                 ],
                 onload: () => {
                     new Layout();

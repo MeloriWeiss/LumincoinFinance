@@ -1,5 +1,6 @@
 import {HttpUtils} from "../../utils/http-utils.js";
 import {UrlUtils} from "../../utils/url-utils.js";
+import {DateUtils} from "../../utils/date-utils";
 
 export class IncomesExpensesCreate {
     constructor() {
@@ -17,25 +18,25 @@ export class IncomesExpensesCreate {
     }
 
     initLib() {
-        $.datepicker.regional['ru'] = {
-            closeText: 'Закрыть',
-            prevText: 'Предыдущий',
-            nextText: 'Следующий',
-            currentText: 'Сегодня',
-            monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-            monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
-            dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
-            dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
-            dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
-            weekHeader: 'Не',
-            dateFormat: 'yy-mm-dd',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
-        };
-        $.datepicker.setDefaults($.datepicker.regional['ru']);
-        $(this.dateInput).datepicker();
+        // $.datepicker.regional['ru'] = {
+        //     closeText: 'Закрыть',
+        //     prevText: 'Предыдущий',
+        //     nextText: 'Следующий',
+        //     currentText: 'Сегодня',
+        //     monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        //     monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+        //     dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+        //     dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+        //     dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+        //     weekHeader: 'Не',
+        //     dateFormat: 'yy-mm-dd',
+        //     firstDay: 1,
+        //     isRTL: false,
+        //     showMonthAfterYear: false,
+        //     yearSuffix: ''
+        // };
+        // $.datepicker.setDefaults($.datepicker.regional['ru']);
+        // $('#date').datepicker();
 
         const select2 = $('.select2')
         select2.select2();
@@ -93,9 +94,6 @@ export class IncomesExpensesCreate {
                 option.setAttribute('value', category.id);
                 that.categorySelect.appendChild(option);
             });
-            if (array.length === 0) {
-
-            }
         }
     }
 
@@ -126,14 +124,13 @@ export class IncomesExpensesCreate {
         if (!hasError) {
             let result = await HttpUtils.request('/operations', 'POST', {
                 type: typeSelect.value,
-                amount: this.amountInput.value,
+                amount: +this.amountInput.value,
                 date: this.dateInput.value,
                 comment: commentInput.value ? commentInput.value : ' ',
-                category_id: categorySelect.value,
+                category_id: +categorySelect.value,
             });
             if (result) {
-                console.log(result);
-                // id, type, amount, date, comment, category
+                window.location.hash = '#/incomes-expenses-main';
             }
         }
     }

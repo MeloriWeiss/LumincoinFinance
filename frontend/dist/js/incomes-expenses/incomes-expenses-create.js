@@ -1,28 +1,71 @@
 import {HttpUtils} from "../../utils/http-utils.js";
+import {UrlUtils} from "../../utils/url-utils.js";
 
 export class IncomesExpensesCreate {
     constructor() {
+        this.findElements();
+        this.initLib();
+        this.setEvents();
+        this.getData().then();
+    }
+
+    findElements() {
         this.categorySelect = document.getElementById('category-select');
         this.typeSelectElement = document.getElementById('type-select');
         this.amountInput = document.getElementById('amount');
         this.dateInput = document.getElementById('date');
+    }
 
+    initLib() {
+        $.datepicker.regional['ru'] = {
+            closeText: 'Закрыть',
+            prevText: 'Предыдущий',
+            nextText: 'Следующий',
+            currentText: 'Сегодня',
+            monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+            dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+            dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+            dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+            weekHeader: 'Не',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+        $(this.dateInput).datepicker();
+
+        const select2 = $('.select2')
+        select2.select2();
+        select2.select2({
+            theme: 'bootstrap4'
+        })
+    }
+
+    setEvents() {
         document.getElementById('create').onclick = () => this.createOperation();
-        document.getElementById('type-select').onchange = () => this.processForm();
-
-        this.getData().then();
+        document.getElementById('type-select').onchange = () => this.processSelects();
     }
 
     async getData() {
         await this.getIncomeCategories();
         await this.getExpenseCategories();
-        this.processForm();
+        const type = UrlUtils.getParam('type');
+        if (type) {
+            for (let i = 0; i < this.typeSelectElement.options.length; i++) {
+                if (this.typeSelectElement.options[i].value === type) {
+                    this.typeSelectElement.options[i].setAttribute('selected', 'selected');
+                }
+            }
+        }
+        this.processSelects();
     }
 
     async getIncomeCategories() {
         let result = await HttpUtils.request('/categories/income', 'GET');
         if (result) {
-            console.log('1 - ' + result);
             this.incomeCategories = result;
         }
     }
@@ -30,12 +73,11 @@ export class IncomesExpensesCreate {
     async getExpenseCategories() {
         let result = await HttpUtils.request('/categories/expense', 'GET');
         if (result) {
-            console.log('2 - ' + result);
             this.expenseCategories = result;
         }
     }
 
-    processForm() {
+    processSelects() {
         const that = this;
         if (this.typeSelectElement.value === 'income') {
             fillSelect(this.incomeCategories);
@@ -51,6 +93,9 @@ export class IncomesExpensesCreate {
                 option.setAttribute('value', category.id);
                 that.categorySelect.appendChild(option);
             });
+            if (array.length === 0) {
+
+            }
         }
     }
 
@@ -59,28 +104,36 @@ export class IncomesExpensesCreate {
         const categorySelect = document.getElementById('category-select');
         const commentInput = document.getElementById('comment');
 
+        let hasError = false;
         if (!this.amountInput.value) {
             this.amountInput.classList.add('is-invalid');
-            return;
+            hasError = true;
         } else {
             this.amountInput.classList.remove('is-invalid');
         }
-        if (this.dateInput.value.length !== 10) {
+        if (!this.dateInput.value) {
             this.dateInput.classList.add('is-invalid');
-            return;
+            hasError = true;
         } else {
             this.dateInput.classList.remove('is-invalid');
         }
-        let result = await HttpUtils.request('/operations', 'POST', {
-            type: typeSelect.value,
-            amount: this.amountInput.value,
-            date: date.getDate(),
-            comment: commentInput.value,
-            category_id: categorySelect.value,
-        });
-        if (result) {
-            console.log(result);
-            // id, type, amount, date, comment, category
+        if (!this.categorySelect.value) {
+            this.categorySelect.classList.add('is-invalid');
+            hasError = true;
+        } else {
+            this.categorySelect.classList.remove('is-invalid');
+        }
+        if (!hasError) {
+            let result = await HttpUtils.request('/operations', 'POST', {
+                type: typeSelect.value,
+                amount: +this.amountInput.value,
+                date: this.dateInput.value,
+                comment: commentInput.value ? commentInput.value : ' ',
+                category_id: +categorySelect.value,
+            });
+            if (result) {
+                window.location.hash = '#/incomes-expenses-main';
+            }
         }
     }
 }

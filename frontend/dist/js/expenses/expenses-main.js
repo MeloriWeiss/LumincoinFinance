@@ -34,7 +34,7 @@ export class ExpensesMain {
                 categoryCard.innerHTML = `<div class="card p-3 h-100">
             <h3 class="h3 text-primary-emphasis mb-3">${category.title}</h3>
             <div class="d-flex align-items-center d-flex flex-wrap gap-2">
-                <a href="/#/expenses-edit?t=4&name=${category.title}&id=${category.id}" class="btn btn-primary">Редактировать</a>
+                <a href="/#/expenses-edit?name=${category.title}&id=${category.id}" class="btn btn-primary">Редактировать</a>
                 <a href="#confirmation-popup" class="open-popup-link btn btn-danger deleteCardElement" data-id="${category.id}">Удалить</a>
             </div>
         </div>`;
