@@ -1,5 +1,5 @@
 export class DateUtils {
-    static parseDate(date) {
+    public static parseDate(date: string): string {
         const [day, month, year] = date.split('.');
         return `${year}-${month}-${day}`;
     }

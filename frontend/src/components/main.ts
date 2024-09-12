@@ -3,43 +3,55 @@ import {DateUtils} from "../utils/date-utils";
 import {HttpUtils} from "../utils/http-utils";
 
 export class Main {
-    constructor() {
-        this.findElements();
-        this.initLib();
-        this.initButtons();
-        this.init().then();
-    }
+    readonly incomesChart: HTMLElement | null;
+    readonly expensesChart: HTMLElement | null;
+    readonly dateFromInput: HTMLInputElement | null;
+    readonly dateToInput: HTMLInputElement | null;
+    readonly dateButtons: string[]
+    private currentDateOption: string;
+    readonly today: string;
 
-    findElements() {
+    constructor() {
         this.incomesChart = document.getElementById('incomes-chart');
         this.expensesChart = document.getElementById('expenses-chart');
         this.dateFromInput = document.getElementById('date-from');
         this.dateToInput = document.getElementById('date-to');
-    }
 
-    async init() {
-        document.getElementById('main-button').classList.add('active');
         this.dateButtons = [
             config.date.today,
             config.date.week,
             config.date.month,
             config.date.year,
             config.date.all,
-            config.date.interval];
+            config.date.interval
+        ];
         this.currentDateOption = this.dateButtons[0];
         this.today = (new Date()).toLocaleDateString();
-        this.dateFromInput.onchange = () => {
-            this.charts.forEach(chart => chart.destroy());
-            this.getOperations().then();
+
+        this.initLib();
+        this.initButtons();
+        this.init().then();
+    }
+
+    private async init(): Promise<void> {
+        document.getElementById('main-button')?.classList.add('active');
+
+        if (this.dateFromInput) {
+            this.dateFromInput.onchange = () => {
+                this.charts.forEach(chart => chart.destroy());
+                this.getOperations().then();
+            }
         }
-        this.dateToInput.onchange = () => {
-            this.charts.forEach(chart => chart.destroy());
-            this.getOperations().then();
+        if (this.dateToInput) {
+            this.dateToInput.onchange = () => {
+                this.charts.forEach(chart => chart.destroy());
+                this.getOperations().then();
+            }
         }
         this.getOperations().then();
     }
 
-    initLib() {
+    private initLib(): void {
         $.datepicker.regional['ru'] = {
             closeText: 'Закрыть',
             prevText: 'Предыдущий',
@@ -61,34 +73,38 @@ export class Main {
         $('.date-input').datepicker();
     }
 
-    initButtons() {
-        let dateButtonsElement = document.getElementById('period-buttons');
-        for (let i = 0; i < dateButtonsElement.children.length - 1; i++) {
-            dateButtonsElement.children[i].children[0].setAttribute('data-id', i);
-            dateButtonsElement.children[i].children[0].onclick = () => {
-                this.charts.forEach(chart => chart.destroy());
-                for (let i = 0; i < dateButtonsElement.children.length - 1; i++) {
-                    if (dateButtonsElement.children[i].children[0].classList.contains('btn-secondary')) {
-                        dateButtonsElement.children[i].children[0].classList.remove('btn-secondary');
-                        dateButtonsElement.children[i].children[0].classList.add('btn-outline-secondary');
+    private initButtons(): void {
+        let dateButtonsElement: HTMLElement | null = document.getElementById('period-buttons');
+        if (dateButtonsElement) {
+            for (let i: number = 0; i < dateButtonsElement.children.length - 1; i++) {
+                dateButtonsElement.children[i].children[0].setAttribute('data-id', i.toString());
+                (dateButtonsElement.children[i].children[0] as HTMLElement).onclick = () => {
+                    this.charts.forEach(chart => chart.destroy());
+                    for (let i: number = 0; i < dateButtonsElement!.children.length - 1; i++) {
+                        if (dateButtonsElement!.children[i].children[0].classList.contains('btn-secondary')) {
+                            dateButtonsElement!.children[i].children[0].classList.remove('btn-secondary');
+                            dateButtonsElement!.children[i].children[0].classList.add('btn-outline-secondary');
+                        }
                     }
-                }
-                dateButtonsElement.children[i].children[0].classList.add('btn-secondary');
-                dateButtonsElement.children[i].children[0].classList.remove('btn-outline-secondary');
-                this.currentDateOption = this.dateButtons[dateButtonsElement.children[i].children[0].getAttribute('data-id')];
-                this.getOperations().then();
-                if (dateButtonsElement.children[i].children[0].innerText === 'Интервал') {
-                    this.dateFromInput.removeAttribute('disabled');
-                    this.dateToInput.removeAttribute('disabled');
-                } else {
-                    this.dateFromInput.setAttribute('disabled', 'disabled');
-                    this.dateToInput.setAttribute('disabled', 'disabled');
-                }
-            };
+                    dateButtonsElement!.children[i].children[0].classList.add('btn-secondary');
+                    dateButtonsElement!.children[i].children[0].classList.remove('btn-outline-secondary');
+                    this.currentDateOption = this.dateButtons[Number(dateButtonsElement!.children[i].children[0].getAttribute('data-id'))];
+                    this.getOperations().then();
+                    if (this.dateFromInput && this.dateToInput) {
+                        if ((dateButtonsElement!.children[i].children[0] as HTMLElement).innerText === 'Интервал') {
+                            this.dateFromInput.removeAttribute('disabled');
+                            this.dateToInput.removeAttribute('disabled');
+                        } else {
+                            this.dateFromInput.setAttribute('disabled', 'disabled');
+                            this.dateToInput.setAttribute('disabled', 'disabled');
+                        }
+                    }
+                };
+            }
         }
     }
 
-    async getOperations() {
+    private async getOperations(): Promise<void> {
         let period = `?period=`;
         period += `${this.currentDateOption}`;
         switch (this.currentDateOption) {
@@ -96,7 +112,7 @@ export class Main {
                 period += `&dateFrom=${DateUtils.parseDate(this.today)}&dateTo=${DateUtils.parseDate(this.today)}`;
                 break;
             case config.date.interval:
-                if (this.dateFromInput.value.match(/[12][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/) &&
+                if (this.dateToInput && this.dateFromInput && this.dateFromInput.value.match(/[12][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/) &&
                     this.dateToInput.value.match(/[12][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/)) {
                     period += `&dateFrom=${this.dateFromInput.value}&dateTo=${this.dateToInput.value}`;
                 } else {
@@ -109,17 +125,17 @@ export class Main {
         }
     }
 
-    processCharts(result) {
+    private processCharts(result): void {
         this.setChartsData(result);
         this.createChart(this.incomesChart, this.incomesChartData);
         this.createChart(this.expensesChart, this.expensesChartData);
     }
 
-    setChartsData(result) {
+    private setChartsData(result): void {
         setIncomeChartData.call(this, result);
         setExpenseChartData.call(this, result);
 
-        function setIncomeChartData(result) {
+        function setIncomeChartData(result): void {
             const incomeOperations = result.filter(operation => operation.type === 'income');
             const categories = incomeOperations.map(operation => operation.category);
             let amounts = incomeOperations.map(operation => operation.amount);
@@ -142,7 +158,7 @@ export class Main {
             };
         }
 
-        function setExpenseChartData(result) {
+        function setExpenseChartData(result): void {
             const expenseOperations = result.filter(operation => operation.type === 'expense');
             const categories = expenseOperations.map(operation => operation.category);
             let amounts = expenseOperations.map(operation => operation.amount);
@@ -166,9 +182,9 @@ export class Main {
         }
     }
 
-    charts = [];
+    charts: [] = [];
 
-    createChart(chartElement, data) {
+    private createChart(chartElement, data): void {
         let chart = new Chart(chartElement, {
             type: 'pie',
             data: data,
