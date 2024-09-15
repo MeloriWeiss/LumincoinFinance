@@ -1,4 +1,4 @@
-import config from "../config/config.js";
+import config from "../config/config";
 import {AuthUtils} from "./auth-utils";
 import {HttpRequestType} from "../types/http-request.type";
 
