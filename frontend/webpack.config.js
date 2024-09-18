@@ -30,6 +30,11 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "./src/templates", to: "templates" },
+                { from: "./node_modules/jquery/dist/jquery.min.js", to: "lib/js/jquery.min.js" },
+                { from: "./node_modules/magnific-popup/dist/jquery.magnific-popup.min.js", to: "lib/js/jquery.magnific-popup.min.js" },
+                { from: "./node_modules/jquery-ui/dist/jquery-ui.min.js", to: "lib/js/jquery-ui.min.js" },
+                { from: "./node_modules/chart.js/dist/chart.js", to: "lib/js/chart.js" },
+                { from: "./lib", to: "lib" },
                 { from: "./lib", to: "lib" },
                 { from: "./src/styles", to: "css" },
                 { from: "./src/static", to: "static" },

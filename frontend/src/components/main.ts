@@ -2,7 +2,8 @@ import config from "../config/config";
 import {DateUtils} from "../utils/date-utils";
 import {HttpUtils} from "../utils/http-utils";
 import {OperationResponseType} from "../types/http-response.type";
-import {Chart} from '../../node_modules/@types/chart.js/index';
+import {ArcElement, Chart, PieController} from "chart.js";
+import {ChartDataType} from "../types/chart-data.type";
 
 export class Main {
     readonly incomesChart: HTMLCanvasElement | null;
@@ -12,9 +13,9 @@ export class Main {
     readonly dateButtons: string[]
     private currentDateOption: string;
     readonly today: string;
-    private charts: Chart[] = [];
-    private incomesChartData: {} | null = null;
-    private expensesChartData: {} | null = null;
+    private charts: any[] = [];
+    private incomesChartData: ChartDataType | null = null;
+    private expensesChartData: ChartDataType | null = null;
 
     constructor() {
         this.incomesChart = <HTMLCanvasElement | null>document.getElementById('incomes-chart');
@@ -39,6 +40,7 @@ export class Main {
     }
 
     private async init(): Promise<void> {
+        Chart.register(PieController, ArcElement);
         document.getElementById('main-button')?.classList.add('active');
 
         if (this.dateFromInput) {
@@ -53,6 +55,7 @@ export class Main {
                 this.getOperations().then();
             }
         }
+
         this.getOperations().then();
     }
 
@@ -143,10 +146,9 @@ export class Main {
     }
 
     private setChartsData(result: OperationResponseType[]): void {
-        setIncomeChartData.call(this, result);
-        setExpenseChartData.call(this, result);
         const that = this;
-
+        setIncomeChartData(result);
+        setExpenseChartData(result);
         function setIncomeChartData(result: OperationResponseType[]): void {
             const incomeOperations: OperationResponseType[] = result.filter((operation: OperationResponseType) => operation.type === 'income');
             const categories: string[] = incomeOperations.map((operation: OperationResponseType) => operation.category);
@@ -194,7 +196,7 @@ export class Main {
         }
     }
 
-    private createChart(chartElement: HTMLCanvasElement, data: {}): void {
+    private createChart(chartElement: HTMLCanvasElement, data: ChartDataType): void {
         let chart = new Chart(chartElement, {
             type: 'pie',
             data: data,

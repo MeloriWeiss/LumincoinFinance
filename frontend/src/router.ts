@@ -17,7 +17,7 @@ import {MainRoutes} from "./types/main-routes";
 
 export class Router {
     private pageContentElement: HTMLElement | null = null;
-    private tabTitle: HTMLElement | null = null;
+    readonly tabTitle: HTMLElement | null = null;
     private routes: MainRoutes[];
 
     constructor() {
@@ -299,8 +299,8 @@ export class Router {
     private async prepareNewRouteScripts(newRouteObj: MainRoutes): Promise<void> {
         let scripts: HTMLCollection = document.body.getElementsByTagName('script');
         for (let i: number = scripts.length - 1; i >= 0; i--) {
-            if (!scripts[i].getAttribute('href')!.match(/.*lib\/js\/bootstrap\..*min\.js/) &&
-            !scripts[i].getAttribute('href')!.match(/.*lib\/js\/jquery-3.7.1.min.js/)) {
+            if (!scripts[i].getAttribute('src')!.match(/.*lib\/js\/bootstrap\..*min\.js/) &&
+            !scripts[i].getAttribute('src')!.match(/.*lib\/js\/jquery-3.7.1.min.js/)) {
                 scripts[i].remove();
             }
         }
@@ -344,7 +344,7 @@ export class Router {
                 }
 
                 this.prepareNewRouteStyles(newRouteObj);
-                if (newRouteObj.hasOwnProperty('scripts') && newRouteObj.scripts!.length > 0) {
+                if (newRouteObj.scripts && newRouteObj.scripts!.length > 0) {
                     await this.prepareNewRouteScripts(newRouteObj);
                 }
                 if (newRouteObj.onload && typeof newRouteObj.onload === 'function') {

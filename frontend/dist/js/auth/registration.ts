@@ -8,7 +8,7 @@ import {
 import {ValidationType} from "../../types/validation.type";
 
 export class Registration {
-    private commonErrorElement: HTMLElement | null;
+    readonly commonErrorElement: HTMLElement | null;
     private validations: ValidationType[];
     constructor() {
         this.commonErrorElement = document.getElementById('common-error');
@@ -60,7 +60,7 @@ export class Registration {
         let repeatPasswordValidation: ValidationType | undefined = this.validations.find((validation: ValidationType) => validation.name === 'password');
         this.validations.forEach((validation: ValidationType) => {
             const validationInput: HTMLInputElement | null = <HTMLInputElement | null>document.getElementById(validation.id);
-            if (validationInput && validation.element) {
+            if (validationInput && validation.hasOwnProperty('element')) {
                 validation.element = validationInput;
                 validation.element.onchange = () => {
                     if (validation.name === 'repeat-password') {
