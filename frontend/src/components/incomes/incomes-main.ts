@@ -57,9 +57,9 @@ export class IncomesMain {
                 document.querySelectorAll('[data-id]')?.forEach((item: Element) => {
                     if (item.getAttribute('data-id') === this.currentCategoryId!.toString() && this.currentCategoryId !== null) {
                         item.closest('.category-card')?.remove();
-                        return;
                     }
                 });
+                return;
             }
         }
         alert('Произошла ошибка при удалении категории');

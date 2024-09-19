@@ -3,7 +3,6 @@ import {DateUtils} from "../utils/date-utils";
 import {HttpUtils} from "../utils/http-utils";
 import {OperationResponseType} from "../types/http-response.type";
 import {Chart} from "chart.js";
-// import {ArcElement, Chart, PieController} from "chart.js";
 import {ChartDataType} from "../types/chart-data.type";
 
 export class Main {
@@ -41,7 +40,6 @@ export class Main {
     }
 
     private async init(): Promise<void> {
-        // Chart.register(PieController, ArcElement);
         document.getElementById('main-button')?.classList.add('active');
 
         if (this.dateFromInput) {

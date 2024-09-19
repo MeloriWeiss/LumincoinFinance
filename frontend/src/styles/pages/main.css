@@ -37,7 +37,7 @@
 }
 
 .chart-container {
-    max-width: 450px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -45,11 +45,5 @@
 @media screen and (max-width: 1400px) {
     .vertical-line {
         border: none;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .chart-container {
-        max-width: 350px;
     }
 }

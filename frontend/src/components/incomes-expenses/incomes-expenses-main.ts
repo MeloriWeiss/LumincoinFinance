@@ -138,7 +138,7 @@ export class IncomesExpensesMain {
                 this.tableContainer!.innerHTML += `<tr>
                 <td class="">${index + 1}</td>
                 <td class="${operation.type === 'income' ? 'text-success' : 'text-danger'}">${operation.type === 'income' ? 'Доход' : 'Расход'}</td>
-                <td class="">${operation.category}</td>
+                <td class="">${operation.category != undefined ? operation.category : 'Категория удалена'}</td>
                 <td class="">${operation.amount} $</td>
                 <td class="">${date}</td>
                 <td class="">${operation.comment}</td>

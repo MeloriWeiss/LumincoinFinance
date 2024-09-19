@@ -27,7 +27,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "chart.js": "^4.4.4",
+    "chart.js": "^2.9.4",
     "magnific-popup": "^1.2.0"
   }
 }

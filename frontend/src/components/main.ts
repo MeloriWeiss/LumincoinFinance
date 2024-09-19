@@ -2,7 +2,7 @@ import config from "../config/config";
 import {DateUtils} from "../utils/date-utils";
 import {HttpUtils} from "../utils/http-utils";
 import {OperationResponseType} from "../types/http-response.type";
-import {ArcElement, Chart, PieController} from "chart.js";
+import {Chart} from "chart.js";
 import {ChartDataType} from "../types/chart-data.type";
 
 export class Main {
@@ -40,7 +40,6 @@ export class Main {
     }
 
     private async init(): Promise<void> {
-        Chart.register(PieController, ArcElement);
         document.getElementById('main-button')?.classList.add('active');
 
         if (this.dateFromInput) {
@@ -151,7 +150,7 @@ export class Main {
         setExpenseChartData(result);
         function setIncomeChartData(result: OperationResponseType[]): void {
             const incomeOperations: OperationResponseType[] = result.filter((operation: OperationResponseType) => operation.type === 'income');
-            const categories: string[] = incomeOperations.map((operation: OperationResponseType) => operation.category);
+            const categories: string[] = incomeOperations.map((operation: OperationResponseType) => operation.category != undefined ? operation.category : 'Категория удалена');
             let amounts: number[] = incomeOperations.map((operation: OperationResponseType) => operation.amount);
             let colors: string[] = [];
             incomeOperations.forEach((operation: OperationResponseType, index: number) => {
@@ -174,7 +173,7 @@ export class Main {
 
         function setExpenseChartData(result: OperationResponseType[]): void {
             const expenseOperations: OperationResponseType[] = result.filter((operation: OperationResponseType) => operation.type === 'expense');
-            const categories: string[] = expenseOperations.map((operation: OperationResponseType) => operation.category);
+            const categories: string[] = expenseOperations.map((operation: OperationResponseType) => operation.category != undefined ? operation.category : 'Категория удалена');
             let amounts: number[] = expenseOperations.map((operation: OperationResponseType) => operation.amount);
             let colors: string[] = [];
             expenseOperations.forEach((operation: OperationResponseType, index: number) => {
